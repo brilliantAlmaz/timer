@@ -3,21 +3,58 @@ startBtn=document.querySelector('.start-btn');
 startBtnOverflow=document.querySelector('.start-btn-overblock');
 clearBtn=document.querySelector('.clear-btn');
 clearBtnOverflow=document.querySelector('.clear-btn-overblock');
-var hours=0, minutes=0, seconds=0, time, timerCountDown;
+repeatBtn=document.querySelector('.repeat-btn');
+repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
+var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
+
 
 buttonsReset();
 startBtn.addEventListener('click', function(){
+	repeatBtn.classList.remove('inactive');
+	repeatBtnOverflow.classList.remove('inactive');
 	if (started){
 		pause();
+		inputs.forEach(item => 	item.classList.add('paused'));
 		startBtn.classList.add('inactive');
 		startBtn.style.cursor='pointer';
 	}
 	else{
 		start();
+		inputs.forEach(item => 	item.classList.remove('paused'));
 		startBtn.classList.remove('inactive');
 	}
+	if (repeatRead){
+		timeValue=time;
+		console.log(time);
+		repeatRead=false;
+	}
 });
+repeatBtn.addEventListener('click', function(){
+	clear();
+	buttonsReset();
+	repeat();
+});
+function repeat(){
+	console.log(time);
+	started=true;
+	startBtn.innerHTML='pause';
+	clearBtn.classList.remove('inactive');
+	clearBtnOverflow.classList.remove('inactive');
+	time=timeValue;
+	time++;
+	timerCountDown=setInterval(function(){ //timer countdown
+		if (time>0){ //if time is up (==0) the timer stops
+			timeCounter();
+			printTime();
+		}
+		else{
+			clear();
+			buttonsReset();
+		}
+	},1000);
+}
+
 function start(){
 	started=true;
 	startBtn.innerHTML='pause';
@@ -48,7 +85,9 @@ function pause(){
 clearBtn.addEventListener('click', function(){
 	clearInterval(timerCountDown);
 	clear();
+	repeatRead=true;
 	buttonsReset();
+
 });
 
 function buttonsReset(){
@@ -57,6 +96,7 @@ function buttonsReset(){
 	startBtnOverflow.classList.remove('inactive');
 	clearBtn.classList.add('inactive');
 	clearBtnOverflow.classList.add('inactive');
+	inputs.forEach(item => 	item.classList.remove('paused'));
 }
 
 function inputsEmpty(){
