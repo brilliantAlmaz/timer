@@ -1,4 +1,5 @@
 inputs=document.querySelectorAll('.time-input-block input');
+inputOverflow=document.querySelector('.time-input__block-overflow');
 startBtn=document.querySelector('.start-btn');
 startBtnOverflow=document.querySelector('.start-btn-overblock');
 clearBtn=document.querySelector('.clear-btn');
@@ -8,6 +9,21 @@ repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
 var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
 
+//circle arguments
+var radius;
+var circumference;
+var offset;
+function setProgress(percent){
+	offset = circumference - percent/100 * circumference;
+	circle.style.strokeDashoffset = offset;
+}
+const circle = document.querySelector('.circle');
+radius = circle.r.baseVal.value;
+circumference = 2 * Math.PI * radius;
+circle.style.strokeDasharray = `${circumference} ${circumference}`;
+circle.style.strokeDashoffset = circumference;
+circle.style.transition=`all 1s linear 0s`;
+//
 
 buttonsReset();
 startBtn.addEventListener('click', function(){
@@ -20,6 +36,7 @@ startBtn.addEventListener('click', function(){
 		startBtn.style.cursor='pointer';
 	}
 	else{
+		inputOverflow.style.zIndex='-1';
 		start();
 		inputs.forEach(item => 	item.classList.remove('paused'));
 		startBtn.classList.remove('inactive');
@@ -34,6 +51,7 @@ repeatBtn.addEventListener('click', function(){
 	clear();
 	buttonsReset();
 	repeat();
+	clearCircle();
 });
 function repeat(){
 	console.log(time);
@@ -68,16 +86,19 @@ function start(){
 			printTime();
 		}
 		else{
+			clearInterval(timerCountDown);
 			clear();
+			repeatRead=true;
 			buttonsReset();
+			clearCircle();
 		}
 	},1000);
 }
-
 function pause(){
 	if (started){
 		startBtn.innerHTML='continue';
 		clearInterval(timerCountDown);
+		inputOverflow.style.zIndex='1';
 	}
 	started=false;
 }
@@ -87,16 +108,22 @@ clearBtn.addEventListener('click', function(){
 	clear();
 	repeatRead=true;
 	buttonsReset();
-
+	clearCircle();
+	inputOverflow.style.zIndex='-1';
 });
+function clearCircle(){
+	circle.style.transition='all 0.2s ease 0s';
+	setProgress(100);
+}
 
-function buttonsReset(){
+function buttonsReset(){ //resets the visual design of buttons
 	startBtn.innerHTML='start';
 	startBtn.classList.remove('inactive');
 	startBtnOverflow.classList.remove('inactive');
 	clearBtn.classList.add('inactive');
 	clearBtnOverflow.classList.add('inactive');
 	inputs.forEach(item => 	item.classList.remove('paused'));
+	setProgress(100);
 }
 
 function inputsEmpty(){
@@ -141,7 +168,10 @@ function calcTimeSeconds(t){ //calculates current time in seconds
 }
 
 function timeCounter(){ //counts down the time
+
 	time--;
+	circle.style.transition='all 1s linear 0s';
+	setProgress(time/timeValue * 100);
 }
 
 function printTime(){ //prints the curreent time into the input boxes
@@ -164,3 +194,4 @@ function printTime(){ //prints the curreent time into the input boxes
 		inputs[2].value=calcTimeSeconds(time);
 	}
 }
+

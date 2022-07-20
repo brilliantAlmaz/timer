@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 html{
 	font-family: 'Poppins';
+	overflow: hidden;
 }
 .wrapper {}
 .container {
 	max-width:1200px;
 	margin: 0 auto;
 }
-
 .titleblock {
 	margin: 30px 0 0 0;
 }
@@ -28,15 +28,20 @@ html{
 	text-align:center;
 }
 .time-input-block {
-	margin: 50px auto 0;
+	margin: 0px auto 0;
 	max-width: 435px;
+	gap:10px;
 	display: flex;
 	justify-content:space-between;
 	align-items:center;
-
+	position: relative;
+}
+form{
+	display: block;
+	margin: 75px 0 0 0;
 }
 .input{
-	width:22%;
+	width:95px;
 	padding: 5px;
 	font-size: 60px;
 	border:3px solid #00000000;
@@ -64,8 +69,9 @@ html{
 .minute-input {}
 .second-input {}
 .buttonsblock {
-	margin:120px auto 0;
-	width:700px;
+	margin:60px auto 0;
+	max-width: 700px;
+	gap:40px;
 	display: flex;
 	justify-content:space-between;
 }
@@ -74,7 +80,7 @@ html{
 	width:120px;
 	height:75px;
 	background: #000;
-	border:2px solid #00000000;
+	border:3px solid #00000000;
 	line-height: 75px;
 	text-align:center;
 	color:#fff;
@@ -83,6 +89,7 @@ html{
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	border-radius: 8px;
+	transition: all 0.3s ease 0s;
 }
 .btn.inactive{
 	cursor:default;
@@ -90,6 +97,9 @@ html{
 	background: #fff;
 	font-weight: 400;
 	border:2px solid #000;
+}
+.start-btn.inactive{
+	font-weight: 600;
 }
 .buttonblock-start{
 	position: relative;
@@ -124,4 +134,21 @@ html{
 	&.inactive{
 		z-index:1;
 	}
+}
+.circle{
+	transform-origin:center;
+	transform:rotate(-90deg);
+}
+.circleblock{
+	margin:45px auto 0px;
+	max-width:150px;
+	display: block;
+}
+.time-input__block-overflow {
+	position: absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	z-index:-1;
 }
