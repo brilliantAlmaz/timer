@@ -112,16 +112,16 @@ function start(){
 popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
-	audio.pause();
-	audio.currentTime=0;
+	//audio.pause();
+	//audio.currentTime=0;
 	html.style.filter='blur(0px)';
 	htmlOverflow.style.zIndex='0';
 }));
 popUpBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
-	audio.pause();
-	audio.currentTime=0;
+	//audio.pause();
+	//audio.currentTime=0;
 	html.style.filter='blur(0px)';
 	htmlOverflow.style.zIndex='0';
 }));
