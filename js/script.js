@@ -6,8 +6,13 @@ clearBtn=document.querySelector('.clear-btn');
 clearBtnOverflow=document.querySelector('.clear-btn-overblock');
 repeatBtn=document.querySelector('.repeat-btn');
 repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
+popUp=document.querySelector('.pop-up');
+popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
+popUpBtn=document.querySelectorAll('.pop-up__btn');
+popUpExplain=document.querySelector('.pop-up__explain');
 var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
+var audio = new Audio('../audio/alarm.mp3');
 
 //circle arguments
 var radius;
@@ -24,27 +29,32 @@ circle.style.strokeDasharray = `${circumference} ${circumference}`;
 circle.style.strokeDashoffset = circumference;
 circle.style.transition=`all 1s linear 0s`;
 //
-
 buttonsReset();
 startBtn.addEventListener('click', function(){
-	repeatBtn.classList.remove('inactive');
-	repeatBtnOverflow.classList.remove('inactive');
-	if (started){
-		pause();
-		inputs.forEach(item => 	item.classList.add('paused'));
-		startBtn.classList.add('inactive');
-		startBtn.style.cursor='pointer';
+	if (checkInput()){
+		repeatBtn.classList.remove('inactive');
+		repeatBtnOverflow.classList.remove('inactive');
+		if (started){
+			pause();
+			inputs.forEach(item => 	item.classList.add('paused'));
+			startBtn.classList.add('inactive');
+			startBtn.style.cursor='pointer';
+		}
+		else{
+			inputOverflow.style.zIndex='-1';
+			start();
+			inputs.forEach(item => 	item.classList.remove('paused'));
+			startBtn.classList.remove('inactive');
+		}
+		if (repeatRead){
+			timeValue=time;
+			console.log(time);
+			repeatRead=false;
+		}
 	}
 	else{
-		inputOverflow.style.zIndex='-1';
-		start();
-		inputs.forEach(item => 	item.classList.remove('paused'));
-		startBtn.classList.remove('inactive');
-	}
-	if (repeatRead){
-		timeValue=time;
-		console.log(time);
-		repeatRead=false;
+		clear();
+		popUpExplain.style.top='0';
 	}
 });
 repeatBtn.addEventListener('click', function(){
@@ -91,9 +101,23 @@ function start(){
 			repeatRead=true;
 			buttonsReset();
 			clearCircle();
+			popUp.style.top='0';
+			audio.play();
 		}
 	},1000);
 }
+popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
+	popUp.style.top='-120%';
+	popUpExplain.style.top='-120%';
+	audio.pause();
+	audio.currentTime=0;
+}));
+popUpBtn.forEach(item => item.addEventListener('click', function(){
+	popUp.style.top='-120%';
+	popUpExplain.style.top='-120%';
+	audio.pause();
+	audio.currentTime=0;
+}));
 function pause(){
 	if (started){
 		startBtn.innerHTML='continue';
@@ -168,7 +192,6 @@ function calcTimeSeconds(t){ //calculates current time in seconds
 }
 
 function timeCounter(){ //counts down the time
-
 	time--;
 	circle.style.transition='all 1s linear 0s';
 	setProgress(time/timeValue * 100);
@@ -195,3 +218,14 @@ function printTime(){ //prints the curreent time into the input boxes
 	}
 }
 
+function checkInput(){
+	let isNumber;
+	for (let i = 0; i<inputs.length; i++){
+		if (((!(isNaN(+inputs[i].value))) || (inputs[i].value='')) && (!(inputs[i].value.includes(".", 0)))){
+		}
+		else{
+			return false;
+		}
+	};
+	return true;
+}

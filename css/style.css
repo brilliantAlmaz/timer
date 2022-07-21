@@ -76,6 +76,10 @@ html {
   overflow: hidden;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -98,7 +102,7 @@ html {
   padding: 20px 0 0 0;
   color: #d0d0d0;
   font-size: 40px;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   text-align: center;
 }
 
@@ -248,4 +252,112 @@ form {
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+.pop-up {
+  -webkit-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+  z-index: 1;
+  margin: 20px auto 0;
+  position: absolute;
+  top: -120%;
+  left: 0;
+  right: 0;
+  width: 800px;
+  padding: 30px;
+  background: #fff;
+  -webkit-box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
+          box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
+  border-radius: 10px;
+}
+
+.pop-up__exit-sign {
+  cursor: pointer;
+  position: relative;
+  left: 95%;
+  width: 30px;
+  height: 30px;
+  background: #000;
+  border-radius: 4px;
+}
+
+.pop-up__exit-sign:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.pop-up__exit-sign:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 14px;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  border-radius: 2px;
+}
+
+.pop-up__title {
+  font-size: 30px;
+}
+
+.pop-up__subtitle {
+  padding: 20px 0 0 0;
+  font-size: 25px;
+}
+.pop-up__subtitle span {
+  color: #000;
+  font-weight: 600;
+}
+.pop-up__subtitle .heart {
+  letter-spacing: 0;
+}
+
+.pup-up__image {
+  margin: 20px auto 0;
+  max-width: 540px;
+  min-width: 280px;
+}
+.pup-up__image img {
+  width: 540px;
+  height: auto;
+  display: block;
+  -o-object-fit: none;
+     object-fit: none;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.pop-up__btn {
+  width: 300px;
+  margin: 20px auto 0;
+}
+
+.pop-up__explain {
+  -webkit-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+  z-index: 1;
+  margin: 20px auto 0;
+  position: absolute;
+  top: -120%;
+  left: 0;
+  right: 0;
+  width: 800px;
+  padding: 30px;
+  background: #fff;
+  -webkit-box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
+          box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
+  border-radius: 10px;
 }
