@@ -14,7 +14,7 @@ html = document.querySelector('.container');
 htmlOverflow = document.querySelector('.container__overflow')
 var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
-var audio = document.querySelector('#Audio');
+//var audio = document.querySelector('#Audio');
 //circle arguments
 var radius;
 var circumference;
@@ -105,7 +105,7 @@ function start(){
 			popUp.style.top='0';
 			html.style.filter='blur(5px)';
 			htmlOverflow.style.zIndex='1';
-			audio.play();
+			//audio.play();
 		}
 	},1000);
 }
