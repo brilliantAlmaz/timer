@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 
 html {
   font-family: "Poppins";
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .wrapper {
@@ -105,10 +105,13 @@ html {
   letter-spacing: 2px;
   text-align: center;
 }
+.subtitle span {
+  color: #000;
+}
 
 .time-input-block {
   margin: 0px auto 0;
-  max-width: 435px;
+  max-width: 450px;
   gap: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,14 +260,14 @@ form {
 .pop-up {
   -webkit-transition: all 0.2s ease 0s;
   transition: all 0.2s ease 0s;
-  z-index: 1;
+  z-index: 5;
   margin: 20px auto 0;
   position: absolute;
-  top: -120%;
+  top: -500%;
   left: 0;
   right: 0;
   width: 800px;
-  padding: 30px;
+  padding: 30px 30px 30px 60px;
   background: #fff;
   -webkit-box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
           box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
@@ -310,12 +313,13 @@ form {
 }
 
 .pop-up__title {
-  font-size: 30px;
+  margin: 20px 0 0 0;
+  font-size: 50px;
 }
 
 .pop-up__subtitle {
   padding: 20px 0 0 0;
-  font-size: 25px;
+  font-size: 30px;
 }
 .pop-up__subtitle span {
   color: #000;
@@ -327,31 +331,29 @@ form {
 
 .pup-up__image {
   margin: 20px auto 0;
-  max-width: 540px;
-  min-width: 280px;
 }
 .pup-up__image img {
   width: 540px;
   height: auto;
   display: block;
-  -o-object-fit: none;
-     object-fit: none;
+  -o-object-fit: contain;
+     object-fit: contain;
   border-radius: 8px;
   margin: 0 auto;
 }
 
 .pop-up__btn {
-  width: 300px;
+  width: 80%;
   margin: 20px auto 0;
 }
 
 .pop-up__explain {
   -webkit-transition: all 0.2s ease 0s;
   transition: all 0.2s ease 0s;
-  z-index: 1;
+  z-index: 5;
   margin: 20px auto 0;
   position: absolute;
-  top: -120%;
+  top: -500%;
   left: 0;
   right: 0;
   width: 800px;
@@ -360,4 +362,119 @@ form {
   -webkit-box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
           box-shadow: 0px 0px 31px -6px rgba(81, 53, 52, 0.2);
   border-radius: 10px;
+}
+
+.container__overflow {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+}
+
+@media (max-width: 810px) {
+  .buttonsblock {
+    width: 500px;
+  }
+
+  .pop-up {
+    width: 95%;
+  }
+
+  .pop-up__explain {
+    width: 95%;
+  }
+
+  .pup-up__image img {
+    width: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .container {
+    max-width: 400px;
+  }
+
+  .buttonsblock {
+    margin: 90px auto 0;
+    max-width: 400px;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 120px;
+  }
+
+  .overblock {
+    width: 120px;
+  }
+
+  .circleblock {
+    margin: 70px auto 0;
+  }
+
+  .pop-up__subtitle {
+    font-size: 25px;
+  }
+}
+@media (max-width: 430px) {
+  .container {
+    max-width: 320px;
+  }
+
+  .time-input-block {
+    gap: 5px;
+  }
+
+  .buttonsblock {
+    max-width: 320px;
+    gap: 2px;
+  }
+
+  .btn {
+    width: 100px;
+  }
+
+  .overblock {
+    width: 100px;
+  }
+
+  .pop-up .btn {
+    font-size: 20px;
+  }
+  .pop-up .pop-up__subtitle {
+    font-size: 20px;
+  }
+  .pop-up .pop-up__title {
+    font-size: 35px;
+  }
+}
+@media (max-width: 320px) {
+  .container {
+    max-width: 275px;
+  }
+
+  .buttonsblock {
+    max-width: 275px;
+    margin: 60px auto 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 20px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .overblock {
+    width: 100%;
+  }
+
+  .input {
+    width: 75px;
+    font-size: 45px;
+  }
+}
+.pop-up__btn {
+  width: 80%;
+  margin: 20px auto 0;
 }

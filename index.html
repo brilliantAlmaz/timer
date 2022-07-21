@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="icon.svg">
 	<title>Timer</title>
 </head>
 <body>
@@ -15,11 +16,11 @@
 			<div class="pup-up__image">
 				<img src="img/finish.gif" alt="">
 			</div>
-			<div class="pop-up__btn btn">get back to work!</div>
+			<div class="pop-up__btn btn">i got it!</div>
 		</div>
 		<div class="pop-up__explain">
 			<div class="pop-up__exit-sign"></div>
-			<div class="pop-up__title title">Let me explain...</div>
+			<div class="pop-up__title title">Let me explain</div>
 			<div class="pop-up__subtitle subtitle">You need to type <span>number</span> in order to start the timer. You can't type text or symbols other than numbers inside them. <br>
 				If you leave an input box empty, it will be zero.
 				<br><br>
@@ -30,10 +31,11 @@
 			</div>
 			<div class="pop-up__btn btn">i got it!</div>
 		</div>
+		<div class="container__overflow"></div>
 		<div class="container">
 			<div class="titleblock">
 				<div class="title">Timer</div>
-				<div class="subtitle">for whatever reason you've got.</div>
+				<div class="subtitle">for you to focus on achieving your <span>dreams!</span></div>
 			</div>
 			<form action="#" method='get'>
 				<div class="time-input-block">
@@ -65,7 +67,10 @@
 			</form>
 		</div>
 	</div>
-	<script src='js/script.js'>
-	</script>
-</body>
-</html>
+	<audio id="Audio">
+		<source src="audio/alarm.mp3" type="audio/mpeg">
+		</audio>
+		<script src='js/script.js'>
+		</script>
+	</body>
+	</html>

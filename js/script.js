@@ -10,10 +10,11 @@ popUp=document.querySelector('.pop-up');
 popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
 popUpBtn=document.querySelectorAll('.pop-up__btn');
 popUpExplain=document.querySelector('.pop-up__explain');
+html = document.querySelector('.container');
+htmlOverflow = document.querySelector('.container__overflow')
 var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
-var audio = new Audio('../audio/alarm.mp3');
-
+var audio = document.querySelector('#Audio');
 //circle arguments
 var radius;
 var circumference;
@@ -48,13 +49,14 @@ startBtn.addEventListener('click', function(){
 		}
 		if (repeatRead){
 			timeValue=time;
-			console.log(time);
 			repeatRead=false;
 		}
 	}
 	else{
 		clear();
 		popUpExplain.style.top='0';
+		html.style.filter='blur(5px)';
+		htmlOverflow.style.zIndex='1';
 	}
 });
 repeatBtn.addEventListener('click', function(){
@@ -102,21 +104,27 @@ function start(){
 			buttonsReset();
 			clearCircle();
 			popUp.style.top='0';
+			html.style.filter='blur(5px)';
+			htmlOverflow.style.zIndex='1';
 			audio.play();
 		}
 	},1000);
 }
 popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
-	popUp.style.top='-120%';
-	popUpExplain.style.top='-120%';
+	popUp.style.top='-500%';
+	popUpExplain.style.top='-500%';
 	audio.pause();
 	audio.currentTime=0;
+	html.style.filter='blur(0px)';
+	htmlOverflow.style.zIndex='0';
 }));
 popUpBtn.forEach(item => item.addEventListener('click', function(){
-	popUp.style.top='-120%';
-	popUpExplain.style.top='-120%';
+	popUp.style.top='-500%';
+	popUpExplain.style.top='-500%';
 	audio.pause();
 	audio.currentTime=0;
+	html.style.filter='blur(0px)';
+	htmlOverflow.style.zIndex='0';
 }));
 function pause(){
 	if (started){
