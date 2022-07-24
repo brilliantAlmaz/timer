@@ -83,6 +83,10 @@ function repeat(){
 		else{
 			clear();
 			buttonsReset();
+			popUp.style.top='0';
+			html.style.filter='blur(5px)';
+			htmlOverflow.style.zIndex='1';
+			audio.play();
 		}
 	},1000);
 }
