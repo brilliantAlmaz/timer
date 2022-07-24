@@ -14,6 +14,9 @@ html = document.querySelector('.container');
 htmlOverflow = document.querySelector('.container__overflow')
 var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
 let started=false;
+let audio = new Audio();
+audio.src='audio/alarm.mp3';
+
 //var audio = document.querySelector('#Audio');
 //circle arguments
 var radius;
@@ -105,23 +108,23 @@ function start(){
 			popUp.style.top='0';
 			html.style.filter='blur(5px)';
 			htmlOverflow.style.zIndex='1';
-			//audio.play();
+			audio.play();
 		}
 	},1000);
 }
 popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
-	//audio.pause();
-	//audio.currentTime=0;
+	audio.pause();
+	audio.currentTime=0;
 	html.style.filter='blur(0px)';
 	htmlOverflow.style.zIndex='0';
 }));
 popUpBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
-	//audio.pause();
-	//audio.currentTime=0;
+	audio.pause();
+	audio.currentTime=0;
 	html.style.filter='blur(0px)';
 	htmlOverflow.style.zIndex='0';
 }));
