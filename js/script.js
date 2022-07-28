@@ -1,22 +1,23 @@
-
-inputs=document.querySelectorAll('.time-input-block input');
-inputOverflow=document.querySelector('.time-input__block-overflow');
-startBtn=document.querySelector('.start-btn');
-startBtnOverflow=document.querySelector('.start-btn-overblock');
-clearBtn=document.querySelector('.clear-btn');
-clearBtnOverflow=document.querySelector('.clear-btn-overblock');
-repeatBtn=document.querySelector('.repeat-btn');
-repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
-popUp=document.querySelector('.pop-up');
-popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
-popUpBtn=document.querySelectorAll('.pop-up__btn');
-popUpExplain=document.querySelector('.pop-up__explain');
-html = document.querySelector('.container');
-htmlOverflow = document.querySelector('.container__overflow')
-var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
-let started=false;
-let audio = new Audio();
-audio.src='audio/alarm.mp3';
+if (window.Worker)
+{
+	inputs=document.querySelectorAll('.time-input-block input');
+	inputOverflow=document.querySelector('.time-input__block-overflow');
+	startBtn=document.querySelector('.start-btn');
+	startBtnOverflow=document.querySelector('.start-btn-overblock');
+	clearBtn=document.querySelector('.clear-btn');
+	clearBtnOverflow=document.querySelector('.clear-btn-overblock');
+	repeatBtn=document.querySelector('.repeat-btn');
+	repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
+	popUp=document.querySelector('.pop-up');
+	popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
+	popUpBtn=document.querySelectorAll('.pop-up__btn');
+	popUpExplain=document.querySelector('.pop-up__explain');
+	html = document.querySelector('.container');
+	htmlOverflow = document.querySelector('.container__overflow')
+	var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
+	let started=false;
+	let audio = new Audio();
+	audio.src='audio/alarm.mp3';
 
 //var audio = document.querySelector('#Audio');
 //circle arguments
@@ -69,12 +70,69 @@ repeatBtn.addEventListener('click', function(){
 	repeat();
 	clearCircle();
 });
-
-if (window.Worker){
-	const worker = new Worker('worker.js')
+//const worker = new Worker ('worker.js', {type: 'module'})
+function start()
+{
+	started=true;
+	startBtn.innerHTML='pause';
+	clearBtn.classList.remove('inactive');
+	clearBtnOverflow.classList.remove('inactive');
+	inputsEmpty();
+	time=getTime();
+	timerCountDown=setInterval(function(){ //timer countdown
+		if (time>0){ //if time is up (==0) the timer stops
+			timeCounter();
+			printTime();
+		}
+		else{
+			clearInterval(timerCountDown);
+			clear();
+			repeatRead=true;
+			buttonsReset();
+			clearCircle();
+			popUp.style.top='0';
+			html.style.filter='blur(5px)';
+			htmlOverflow.style.zIndex='1';
+			audio.play();
+		}
+	},1000);
+	
 }
+function repeat(){
+	started=true;
+	startBtn.innerHTML='pause';
+	clearBtn.classList.remove('inactive');
+	clearBtnOverflow.classList.remove('inactive');
+	inputsEmpty();
+	time=getTime();
+	timerCountDown=setInterval(function(){ //timer countdown
+		if (time>0){ //if time is up (==0) the timer stops
+			timeCounter();
+			printTime();
+		}
+		else{
+			clearInterval(timerCountDown);
+			clear();
+			repeatRead=true;
+			buttonsReset();
+			clearCircle();
+			popUp.style.top='0';
+			html.style.filter='blur(5px)';
+			htmlOverflow.style.zIndex='1';
+			audio.play();
+		}
+	},1000);
+}
+function pause(){
 
+	if (started){
+		startBtn.innerHTML='continue';
+		clearInterval(timerCountDown);
+		inputOverflow.style.zIndex='1';
+	}
+	started=false;
 
+}
 popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
@@ -194,4 +252,5 @@ function checkInput(){
 		}
 	};
 	return true;
+}
 }
