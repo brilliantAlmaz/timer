@@ -1,23 +1,22 @@
-if (window.Worker)
-{
-	inputs=document.querySelectorAll('.time-input-block input');
-	inputOverflow=document.querySelector('.time-input__block-overflow');
-	startBtn=document.querySelector('.start-btn');
-	startBtnOverflow=document.querySelector('.start-btn-overblock');
-	clearBtn=document.querySelector('.clear-btn');
-	clearBtnOverflow=document.querySelector('.clear-btn-overblock');
-	repeatBtn=document.querySelector('.repeat-btn');
-	repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
-	popUp=document.querySelector('.pop-up');
-	popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
-	popUpBtn=document.querySelectorAll('.pop-up__btn');
-	popUpExplain=document.querySelector('.pop-up__explain');
-	html = document.querySelector('.container');
-	htmlOverflow = document.querySelector('.container__overflow')
-	var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
-	let started=false;
-	let audio = new Audio();
-	audio.src='audio/alarm.mp3';
+title = document.title;
+inputs=document.querySelectorAll('.time-input-block input');
+inputOverflow=document.querySelector('.time-input__block-overflow');
+startBtn=document.querySelector('.start-btn');
+startBtnOverflow=document.querySelector('.start-btn-overblock');
+clearBtn=document.querySelector('.clear-btn');
+clearBtnOverflow=document.querySelector('.clear-btn-overblock');
+repeatBtn=document.querySelector('.repeat-btn');
+repeatBtnOverflow=document.querySelector('.repeat-btn-overblock');
+popUp=document.querySelector('.pop-up');
+popUpCloseBtn=document.querySelectorAll('.pop-up__exit-sign');
+popUpBtn=document.querySelectorAll('.pop-up__btn');
+popUpExplain=document.querySelector('.pop-up__explain');
+html = document.querySelector('.container');
+htmlOverflow = document.querySelector('.container__overflow')
+var hours=0, minutes=0, seconds=0, time, timerCountDown, timeValue, repeatRead=true;
+let started=false;
+let audio = new Audio();
+audio.src='audio/alarm.mp3';
 
 //var audio = document.querySelector('#Audio');
 //circle arguments
@@ -70,7 +69,6 @@ repeatBtn.addEventListener('click', function(){
 	repeat();
 	clearCircle();
 });
-//const worker = new Worker ('worker.js', {type: 'module'})
 function start()
 {
 	started=true;
@@ -83,6 +81,7 @@ function start()
 		if (time>0){ //if time is up (==0) the timer stops
 			timeCounter();
 			printTime();
+			titlePrintTime()
 		}
 		else{
 			clearInterval(timerCountDown);
@@ -109,6 +108,7 @@ function repeat(){
 		if (time>0){ //if time is up (==0) the timer stops
 			timeCounter();
 			printTime();
+			titlePrintTime()
 		}
 		else{
 			clearInterval(timerCountDown);
@@ -241,6 +241,28 @@ function printTime(){ //prints the curreent time into the input boxes
 		inputs[2].value=calcTimeSeconds(time);
 	}
 }
+function titlePrintTime(){
+	let h,m,s;
+	if (calcTimeHours(time)<10) {
+		h='0'+calcTimeHours(time);
+	}
+	else{
+		h=calcTimeHours(time);
+	}
+	if (calcTimeMinutes(time)<10) {
+		m='0'+calcTimeMinutes(time);
+	}
+	else{
+		m=calcTimeMinutes(time);
+	}
+	if (calcTimeSeconds(time)<10) {
+		s='0'+calcTimeSeconds(time);
+	}
+	else{
+		s=calcTimeSeconds(time);
+	}
+	document.title = `Timer ${h}:${m}:${s}`
+}
 
 function checkInput(){
 	let isNumber;
@@ -252,5 +274,4 @@ function checkInput(){
 		}
 	};
 	return true;
-}
 }
