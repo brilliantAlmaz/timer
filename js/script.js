@@ -1,3 +1,4 @@
+
 inputs=document.querySelectorAll('.time-input-block input');
 inputOverflow=document.querySelector('.time-input__block-overflow');
 startBtn=document.querySelector('.start-btn');
@@ -90,32 +91,11 @@ function repeat(){
 		}
 	},1000);
 }
-
-function start(){
-	started=true;
-	startBtn.innerHTML='pause';
-	clearBtn.classList.remove('inactive');
-	clearBtnOverflow.classList.remove('inactive');
-	inputsEmpty();
-	time=getTime();
-	timerCountDown=setInterval(function(){ //timer countdown
-		if (time>0){ //if time is up (==0) the timer stops
-			timeCounter();
-			printTime();
-		}
-		else{
-			clearInterval(timerCountDown);
-			clear();
-			repeatRead=true;
-			buttonsReset();
-			clearCircle();
-			popUp.style.top='0';
-			html.style.filter='blur(5px)';
-			htmlOverflow.style.zIndex='1';
-			audio.play();
-		}
-	},1000);
+if (window.Worker){
+	const worker = new Worker('worker.js')
 }
+
+
 popUpCloseBtn.forEach(item => item.addEventListener('click', function(){
 	popUp.style.top='-500%';
 	popUpExplain.style.top='-500%';
