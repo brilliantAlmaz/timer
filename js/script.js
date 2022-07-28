@@ -69,28 +69,7 @@ repeatBtn.addEventListener('click', function(){
 	repeat();
 	clearCircle();
 });
-function repeat(){
-	started=true;
-	startBtn.innerHTML='pause';
-	clearBtn.classList.remove('inactive');
-	clearBtnOverflow.classList.remove('inactive');
-	time=timeValue;
-	time++;
-	timerCountDown=setInterval(function(){ //timer countdown
-		if (time>0){ //if time is up (==0) the timer stops
-			timeCounter();
-			printTime();
-		}
-		else{
-			clear();
-			buttonsReset();
-			popUp.style.top='0';
-			html.style.filter='blur(5px)';
-			htmlOverflow.style.zIndex='1';
-			audio.play();
-		}
-	},1000);
-}
+
 if (window.Worker){
 	const worker = new Worker('worker.js')
 }
@@ -112,14 +91,7 @@ popUpBtn.forEach(item => item.addEventListener('click', function(){
 	html.style.filter='blur(0px)';
 	htmlOverflow.style.zIndex='0';
 }));
-function pause(){
-	if (started){
-		startBtn.innerHTML='continue';
-		clearInterval(timerCountDown);
-		inputOverflow.style.zIndex='1';
-	}
-	started=false;
-}
+
 
 clearBtn.addEventListener('click', function(){
 	clearInterval(timerCountDown);
