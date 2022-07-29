@@ -194,6 +194,7 @@ function clear(){ //clears the time and input boxes
 	inputs[1].value='';
 	inputs[2].value='';
 	time=0;
+	titlePrintTime();
 	clearInterval(timerCountDown);
 	started=false;
 }
